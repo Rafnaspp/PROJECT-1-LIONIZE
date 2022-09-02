@@ -1,0 +1,24 @@
+<section>
+    
+  <div class=" container row">
+    <div class="ml-12 col-md-12">
+      <h2 class="text-center mt-5">Add Category</h2>
+      <p style="color: red;">{{status}}</p>
+      <form action="/admin/add-category" method="post" enctype="multipart/form-data">
+       
+
+       
+
+         <label for="">Category</label>
+        <input type="text" name="categoryName" class="form-control" required>
+
+
+        <label for="">Image</label>
+        <input type="file" name="image" class="form-control" required>
+
+        <button type="submit" class="btn btn-success mt-4">Submit</button>
+
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,298 @@
+<section class="checkout">
+    <div class="container">
+        <div class="checkout__form">
+            <div class="row">
+                {{#each saveAddress.address}}
+                <div class="col-md-3" style="border:solid hsl(0, 79%, 43%); background-color: #c6cfc5;}">
+                    <dl class="text-left">
+                        <dt>{{this.Name}}</dt>
+                        <dd>{{this.Address}}</dd>
+                        <dd>{{this.Town_City}}, {{this.State}}</dd>
+                        <dd>PIN:{{this.Post_Code}}</dd>
+                        <dd>Ph:{{this.Phone}}</dd>
+                        <dd>Email:{{this.Email}}</dd>
+                        <dt class="mt-1 mb-1 d-flex">
+                            <input type="radio" name="choice"
+                                onclick="savedAddressSelect('{{this.Name}}','{{this.Address}}','{{this.Town_City}}','{{this.State}}','{{this.Post_Code}}','{{this.Phone}}','{{this.Email}}')"
+                                id="useAddress"><span style="color: #007eff; margin-left: 3px;">Use
+                                Address</span>
+                        </dt><br>
+
+                    </dl>
+                </div>
+                {{/each}}
+            </div>
+            <!-- Checkout Section Begin -->
+
+
+            <form action="" id="checkout-form">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <h6 class="coupon__code"> <a href="#">
+                            </a></h6>
+
+                        <div class="cbab-create-account">
+                            <input name="saveAddress" type="checkbox">
+                            <label>Save address</label>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Name<span>*</span></p>
+                                    <input id="Name" type="text" name="name" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="checkout__input">
+                            <p>Address<span>*</span></p>
+                            <input id="Address" type="text" class="checkout__input__add" name="address" required>
+                        </div>
+                        <div class="checkout__input">
+                            <p>City<span>*</span></p>
+                            <input id="Town_City" type="text" name="city" required>
+                        </div>
+                        <div class="checkout__input">
+                            <p>State<span>*</span></p>
+                            <input id="State" type="text" name="state" required>
+                        </div>
+                        <div class="checkout__input">
+                            <p>Postcode<span>*</span></p>
+                            <input id="Post_Code" type="number" name="pincode" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Phone<span>*</span></p>
+                                    <input id="Phone" type="number" name="mobileNo" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Email<span>*</span></p>
+                                    <input type="text" id="Email" name="email" required>
+                                    <input type="" name="userId" value="{{user._id}}" hidden>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="checkout__order">
+                            <h4 class="order__title">Your order</h4>
+                            <div class="checkout__order__products">Product <span>Total</span></div>
+                            <ul class="checkout__total__products">
+                                {{#each products}}
+                                <li>{{inc @index}}.{{this.product.name}}<span>{{this.sum}}</span></li>
+                                {{/each}}
+                            </ul>
+
+                            <div class="cart__discount">
+                                <div>
+                                    {{#if coupon}}
+                                    <p style="font-weight: 500;">use coupon code <strong
+                                            style="font-style: italic; color: rgb(18, 79, 220);">{{this.Name}}</strong>
+
+                                    </p>
+                                    {{/if}}
+                                </div>
+                                <div class="promotional-code-box">
+                                    <h5 class="checkout-box-title">COUPON CODE</h5>
+                                    <div class="pcb-content">
+                                        <div class="pcb-cuppon-input clearfix">
+                                            {{#each coupon}}
+
+                                            <input type="text" value="{{this.Name}}" id="myInput">
+
+                                            {{/each}}
+
+                                        </div>
+                                        <p>Enter your coupon code if you have one</p>
+                                        <div class="pcb-cuppon-input clearfix">
+
+                                            <input type="text" placeholder="Coupon code" name="Coupon_Code"
+                                                id="couponInput" value="">
+                                            <div>
+                                                <span id="couponValid"></span>
+                                            </div>
+
+                                            <a onclick="couponCheck()"
+                                                class="checkout-page-button hvr-bs btn btn-danger">Apply</a>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart__total">
+                                <h6>Cart total</h6>
+                                <ul>
+
+                                    <li>Discount <span id="totaldiscount"> <i
+                                                class="fa-solid fa-indian-rupee-sign"></i></span></li>
+                                    <li>Total <span id="total"> <i
+                                                class="fa-solid fa-indian-rupee-sign"></i>{{total}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="checkout__input__checkbox">
+                            <label for="payment">
+                                COD
+                                <input type="radio" name="payment-method" value="COD" id="payment" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="checkout__input__checkbox">
+                            <label for="paypal">
+                                Online Payment
+                                <input type="radio" name="payment-method" value="ONLINE" id="paypal" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success">PLACE ORDER</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</section>
+<!-- Checkout Section End -->
+{{!--
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script> --}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Ajax section -->
+<script>
+    $('#checkout-form').submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/place-order',
+            method: 'post',
+            data: $('#checkout-form').serialize(),
+            success: (response) => {
+               alert(response)
+                if (response.codSuccess) {
+                    location.href = '/success-placeOrder'
+                } else {
+                    razorpayPayment(response)
+                }
+            }
+        })
+    })
+    function razorpayPayment(order) {
+        var options = {
+            "key": "rzp_test_0msTdGRUUpBzyU", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "soul store",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+
+
+                verifyPayment(response, order)
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+
+
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+    function verifyPayment(payment, order) {
+        $.ajax({
+            url: '/verify-payment',
+            data: {
+                payment,
+                order
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                    location.href = '/success-placeOrder'
+                } else {
+                    alert('payment failed')
+                }
+            }
+        })
+    }
+
+
+
+
+    function savedAddressSelect(Name, Address, Town_City, State, Post_Code, Phone, Email) {
+        document.getElementById('Name').value = Name
+        document.getElementById('Address').value = Address
+        document.getElementById('Town_City').value = Town_City
+        document.getElementById('State').value = State
+        document.getElementById('Post_Code').value = Post_Code
+        document.getElementById('Phone').value = Phone
+        document.getElementById('Email').value = Email
+    }
+
+</script>
+
+<script>
+    function couponCheck() {
+        let code = $('#couponInput').val()
+        console.log(code)
+        $.ajax({
+            url: '/check-coupon',
+            data: {
+                coupon: code,
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                    $('#couponValid').show()
+                    $('#couponValid').html('<i class="text-success fa-regular fa-circle-check"></i>  Valid Code')
+                    setTimeout(() => {
+                        $('#couponInput').prop('readonly', true)
+                        console.log('hi');
+                    }, 1000)
+                    $('#totaldiscount').html(response.discount)
+                    $('#total').html(response.amount)
+                    $('#ucId').html(response._id)
+                    console.log(response._id)
+                } else {
+                    $('#couponValid').show()
+                    $('#couponValid').html('<i class="fa-solid text-danger fa-xmark"></i> Invalid Code')
+                    $("#discount").html(0)
+                    setTimeout(() => {
+                        $('#couponValid').hide()
+                    }, 3000)
+                }
+            }
+        })
+    }
+</script>
+
+<script>
+    function myFunction() {
+        /* Get the text field */
+        var copyText = document.getElementById("myInput");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(copyText.value);
+
+        /* Alert the copied text */
+        alert("Copied the text: " + copyText.value);
+    }
+</script>

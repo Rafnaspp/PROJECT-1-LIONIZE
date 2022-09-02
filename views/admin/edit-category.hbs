@@ -1,0 +1,24 @@
+<section>
+    
+  <div class=" container row">
+    <div class="ml-5 col-md-6">
+      <h2 class="text-center mt-5">Edit Category</h2>
+      <form action="/admin/edit-category/{{categoryDetail._id}}" method="post" enctype="multipart/form-data">
+       
+
+       
+
+         <label for="">Category</label>
+        <input type="text" name="categoryName" class="form-control" value="{{categoryDetail.Category}}" required>
+
+
+        <label for="">Image</label>
+         <img src="/product-image/{{categoryDetail._id}}.jpg" style="width: 150px; height:150px ;" alt="" id="imgview">
+        <input type="file" name="image" class="form-control" required>
+
+        <button type="submit" class="btn btn-success mt-4">Submit</button>
+
+      </form>
+    </div>
+  </div>
+</section>

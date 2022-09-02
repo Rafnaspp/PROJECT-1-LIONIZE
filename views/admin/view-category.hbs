@@ -1,0 +1,50 @@
+
+<section>
+    <div class="container"> 
+        <div class="">
+            <a href="/admin/add-category" class="btn btn-success mt-5">Add Category</a>
+        </div>
+        <table class="table mt-5" id="productsTable">
+            <thead>
+                <tr>
+                    <th scope="col">Index</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Image</th>
+                    <th>adjuxt</th>
+                </tr>
+            </thead>
+             <tbody>
+                {{#each category}}
+                <tr>
+                    <th scope="row">{{inc @index}}</th>
+                    <td>{{this.Category}} </td>
+                    <td><img src="/product-image/{{this._id}}.jpg" style="width: 50px; height: 50px;"></td>
+                    <td>
+                        <a href="/admin/edit-category?id={{this._id}}" class="btn btn-primary">EDIT</a>
+                         <a href="/admin/delete-category?id={{this._id}}" class="btn btn-danger" onclick="return confirm('are you want delete {{this.name}}? ')">DELETE</a> 
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+
+        $('#productsTable').wrap('<div id="hide" style="display:none"/>');
+
+        $('#hide').css('display', 'block');
+    });
+
+
+    var table = $('#productsTable').DataTable();
+</script>

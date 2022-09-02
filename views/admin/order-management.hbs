@@ -1,0 +1,75 @@
+<section>
+    <div class="container">
+        <div class="">
+            <h2>Order Management</h2>
+        </div>
+        <table class="table mt-5" id="productsTable">
+            <thead>
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">User Id</th>
+                    <th scope="col">Ordered Date</th>
+                    <th scope="col">Payment Method</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col">Status</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            {{#each orderDetails}}
+            <tbody>
+
+                <td>{{inc @index}}</td>
+                <td>{{this.userId}}</td>
+                <td>{{this.date}}</td>
+                <td>{{this.paymentMethod}}</td>
+                {{#if this.orderData.discountData}}
+                <td>{{this.orderData.discountData.amount}}</td>
+                {{else}}
+                <td>{{this.totalAmount}}</td>
+                {{/if}}
+                <td>
+                    {{#if fixed}}
+                    <p>{{this.status}}</p>
+                    {{else}}
+                    <select name="forma" onchange="location = this.value;" class="form-select btn btn-primary"
+                        aria-label="Default select example" name="category" required>
+                        <option>{{this.status}}</option>
+                        <option value="/admin/change-status1/{{this._id}}">shipped</option>
+                        <option value="/admin/change-status2/{{this._id}}">delivered</option>
+                    </select>
+                    {{/if}}
+                </td>
+                {{#if fixed}}
+
+                {{else}}
+                <td>
+                    <a href="/admin/cancel-order/{{this._id}}" class="btn btn-danger">Cancel</a>
+                </td>
+                {{/if}}
+                <td><a class="btn btn-primary"  href="/admin/order-products/{{this._id}}">view products</a></td>
+            </tbody>
+            {{/each}}
+        </table>
+    </div>
+
+</section>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+
+        $('#productsTable').wrap('<div id="hide" style="display:none"/>');
+
+        $('#hide').css('display', 'block');
+    });
+
+
+    var table = $('#productsTable').DataTable();
+</script>

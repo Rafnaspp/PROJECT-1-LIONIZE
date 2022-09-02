@@ -1,0 +1,65 @@
+ <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>{{category}} COLLECTIONS</h4>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <span>Category</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+ 
+  <section class="shop spad">
+        <div class="container">
+            <div class="row">
+                        {{#each catBaseProducts}}
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="/product-image/{{this._id}}.jpg">
+                                    <ul class="product__hover">
+                                         <li><a class="btn btn-light" href="/product-detail?id={{this._id}}"> <i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><img src="/user-assets/img/icon/heart.png" alt=""></a></li>
+                                        <li><a href="#"><img src="/user-assets/img/icon/compare.png" alt=""> <span>Compare</span></a>
+                                        </li>
+                                        <li><a href="#"><img src="/user-assets/img/icon/search.png" alt=""></a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="product__item__text">
+                                    <h6>{{this.name}}</h6>
+                                    <a href="/add-to-cart/{{this._id}}" class="add-cart">+ Add To Cart</a>
+                                    <div class="rating">
+                                        {{!-- <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i> --}}
+
+                                        <p>{{this.category}}</p>
+                                    </div>
+                                     <i class="fa-solid fa-indian-rupee-sign"></i> {{this.price}}
+                                    <div class="product__color__select">
+                                        <label for="pc-4">
+                                            <input type="radio" id="pc-4">
+                                        </label>
+                                        <label class="active black" for="pc-5">
+                                            <input type="radio" id="pc-5">
+                                        </label>
+                                        <label class="grey" for="pc-6">
+                                            <input type="radio" id="pc-6">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </section>

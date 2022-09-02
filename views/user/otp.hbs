@@ -1,0 +1,26 @@
+<section>
+    
+  <div class=" container row">
+    <div class="ml-5 col-md-6">
+      <h2 class="text-center mt-5">OTP form</h2>
+      <form action="/otp" method="post" enctype="multipart/form-data">
+    {{#if otpErr}}   
+  <p class="text-danger">{{otpErr}}</p>
+     {{/if}}  
+
+         <label for="">OTP</label>
+        <input type="text" name="otp" class="form-control">
+
+
+       
+
+        <button type="submit" class="btn btn-success mt-4">Submit</button>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+
+
+

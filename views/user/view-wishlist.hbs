@@ -1,0 +1,152 @@
+<!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4></h4>
+                        <div class="breadcrumb__links">
+                            <a href="/">Home</a>
+                            <span>Wishlist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    {{#if wishproducts}}
+<!-- Shop Section Begin -->
+
+    <section class="shop">
+        <div class="container">
+            <div class="row">
+               
+                <div class="col-lg-9">
+                    <div class="shop__product__option">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                            </div>
+                        </div>
+                    </div>
+
+            
+
+                    <div class="row">
+                        {{#each wishproducts}}
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="/product-image/{{this.product._id}}.jpg">
+                                    <ul class="product__hover">
+                                        <li><a class="btn btn-light" onclick="removeWishItem('{{this.product._id}}','{{this._id}}')"> <i style="color: black;" class="fa-solid fa-xmark"></i></a></li>
+                                         <li><a class="btn btn-light" href="/product-detail?id={{this.product._id}}"> <i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><img src="/user-assets/img/icon/heart.png" alt=""></a></li>
+                                        <li><a href="#"><img src="/user-assets/img/icon/compare.png" alt=""> <span>Compare</span></a>
+                                        </li>
+                                        <li><a href="#"><img src="/user-assets/img/icon/search.png" alt=""></a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="product__item__text">
+                                    <h6>{{this.product.name}}</h6>
+                                    <a href="/add-to-cart/{{this.product._id}}" class="add-cart">+ Add To Cart</a>
+                                    <div class="rating">
+                                        {{!-- <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i> --}}
+                                    
+                                        <p>{{this.product.category}}</p>
+                                    </div>
+                                     <i class="fa-solid fa-indian-rupee-sign"></i> {{this.product.price}}
+                                    {{!-- <div class="product__color__select">
+                                        <label for="pc-4">
+                                            <input type="radio" id="pc-4">
+                                        </label>
+                                        <label class="active black" for="pc-5">
+                                            <input type="radio" id="pc-5">
+                                        </label>
+                                        <label class="grey" for="pc-6">
+                                            <input type="radio" id="pc-6">
+                                        </label>
+                                    </div> --}}
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{!-- <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product__pagination">
+                                <a class="active" href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <span>...</span>
+                                <a href="#">21</a>
+                            </div>
+                        </div>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+    {{else}}
+     <!-- Shopping WISHLIST Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center">
+
+                         
+                         <img class="img-fluid" src="https://www.our-eshop.com/frontend/assets/images/no-wish-list.png" alt="">
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </section>
+    <!-- Shopping WISHLIST Section End -->
+    {{/if}}
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+     function removeWishItem(proId,userId){
+        console.log('wish removeeeeeeeeeeeee')
+        console.log(proId,userId)
+            $.ajax({
+                url:'/remove-wishItem',
+                data:{
+                    user:userId,
+                    product:proId
+                },
+                method:'post',
+                success:(response)=>{
+                   Swal.fire({
+  title: 'Do you want to remove product from wishlist?',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'Yes',
+  denyButtonText: 'No',
+  customClass: {
+    actions: 'my-actions',
+    cancelButton: 'order-1 right-gap',
+    confirmButton: 'order-2',
+    denyButton: 'order-3',
+  }
+}).then((result) => {
+  if (result.isConfirmed) {
+                        location.reload()
+  } else if (result.isDenied) {
+    Swal.fire('Changes are not saved', '', 'info')
+  }
+})
+
+                }
+            })
+        }
+
+        </script>

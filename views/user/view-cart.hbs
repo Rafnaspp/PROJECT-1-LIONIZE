@@ -1,0 +1,229 @@
+
+{{#if total}}
+<!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shopping Cart</h4>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <a href="./shop.html">Shop</a>
+                            <span>Shopping Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shopping Cart Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div id="removeCartItem" class="shopping__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="removeCartItem">
+                              {{#each products}}
+                            
+                                <tr>
+                                    <td class="product__cart__item">
+                                        <div class="product__cart__item__pic">
+                                            <img style="width:50px" src="/product-image/{{this.product._id}}.jpg" alt="">
+                                        </div>
+                                        <div class="product__cart__item__text">
+                                            <h6>{{this.product.name}}</h6>
+                                            <h5>{{this.product.price}}</h5>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <button class="cart-item-count mr-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1,'{{this.sum}}')">-</button>
+                                        <span id="{{this.product._id}}">{{this.quantity}}</span>
+                                        <button class="cart-item-count ml-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1,'{{this.sum}}')">+</button>
+                                    </td>
+                                    
+                                    {{!-- <td class="quantity__item">
+                                        <div class="quantity">
+                                            <div class="pro-qty-2">
+                                                <input type="text" value="{{this.quantity}}">
+                                            </div>
+                                        </div>
+                                    </td> --}}
+                                    <td class="cart__price"> <i class="fa-solid fa-indian-rupee-sign"></i><span id="{{this.product._id}}2">{{this.sum}}</span></td>
+                                   <span ><td><a  class="btn btn-danger" onclick="removeCartItem('{{this.product._id}}','{{this._id}}')">remove</a></td></span>
+                                </tr>
+                                
+                                 {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="continue__btn">
+                                <a href="/view-products">Continue Shopping</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="continue__btn update__btn">
+                                <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="cart__total">
+                        <h6>Cart total</h6>
+                        <ul>
+                           
+                            <li>Total <span id="total"> <i class="fa-solid fa-indian-rupee-sign"></i>{{total}}</span></li>
+                        </ul>
+                        <a href="/proceed-checkout" class="primary-btn">Proceed to checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shopping Cart Section End -->
+{{else}}
+        <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shopping Cart</h4>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <a href="./shop.html">Shop</a>
+                            <span>Shopping Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shopping Cart Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center">
+
+                         
+                         <img class="img-fluid" src="http://hsnbazar.com/images/empty-cart.png" alt="">
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </section>
+    <!-- Shopping Cart Section End -->
+
+   {{/if}}     
+    <!-- Ajax quantity -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function changeQuantity(cartId,proId,userId,count,price){
+            let quantity=parseInt(document.getElementById(proId).innerHTML)
+            count=parseInt(count)
+            $.ajax({
+                url:'/change-product-quantity',
+                data:{ 
+                    user:userId,
+                    cart:cartId,
+                    product:proId,
+                    count:count,
+                    quantity:quantity,
+                    proPrice:price
+                },
+                method:'post',
+                success:(response)=>{
+                    if(response.removeProduct){
+                  Swal.fire({
+  title: 'Do you want to remove product from cart?',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'Yes',
+  denyButtonText: 'No',
+  customClass: {
+    actions: 'my-actions',
+    cancelButton: 'order-1 right-gap',
+    confirmButton: 'order-2',
+    denyButton: 'order-3',
+  }
+}).then((result) => {
+  if (result.isConfirmed) {
+                        location.reload()
+  } else if (result.isDenied) {
+    Swal.fire('Changes are not saved', '', 'info')
+  }
+})
+
+                   
+                     
+                    }else{
+                        document.getElementById(proId).innerHTML=quantity+count
+                         document.getElementById(proId+'2').innerHTML=(quantity+count)*price
+                        $("#total").load(location.href + " #total");
+                        $("#totaldiscount").load(location.href + " #totaldiscount");                    
+                    }
+                }
+            })
+        }
+
+     function removeCartItem(proId,cartId){
+            $.ajax({
+                url:'/remove-cartItem',
+                data:{
+                    cart:cartId,
+                    product:proId
+                },
+                method:'post',
+                success:(response)=>{
+                     Swal.fire({
+  title: 'Do you want to remove product?',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'Yes',
+  denyButtonText: 'No',
+  customClass: {
+    actions: 'my-actions',
+    cancelButton: 'order-1 right-gap',
+    confirmButton: 'order-2',
+    denyButton: 'order-3',
+  }
+}).then((result) => {
+  if (result.isConfirmed) {
+    $("#removeCartItem").load(location.href + " #removeCartItem");
+                        location.reload()
+  } else if (result.isDenied) {
+    Swal.fire('Changes are not saved', '', 'info')
+  }
+})
+                    
+                }
+            })
+        }
+
+     
+                 
+    
+    </script>
+
+    

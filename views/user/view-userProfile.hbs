@@ -1,0 +1,54 @@
+<section class="checkout">
+    <div class="container">
+        <div class="checkout__form">
+<form action="/edit-user-profile/{{userDetail._id}}" method="post">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="row">
+
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p><strong>Name</strong><span>*</span></p>
+                                    <input id="Name" type="text" name="name" value="{{userDetail.Name}}" required>
+                                </div>
+                            </div>
+              
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                       <div class="checkout__input">
+                            <p><strong>LastName</strong><span>*</span></p>
+                            <input id="" type="text" placeholder="Street Address" value="{{userDetail.lastName}}" class="checkout__input__add"
+                                name="lastName" required>
+                        </div>
+
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p><strong>Phone</strong><span>*</span></p>
+                                    <input id="Phone" type="number" value="{{userDetail.mobileNo}}"  name="mobileNo" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p> <strong>Email</strong> <span>*</span></p>
+                                    <input type="text"  value="{{userDetail.Email}}"name="email" required>
+                                    <input id="Email" type="" name="userId" value="" hidden>
+                                </div>
+                               
+                            </div>
+                             <div class="col-lg-6 checkout__input">
+                            <button type="submit" class="btn btn-success mt-4">Update Profile</button>
+                             </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        </div>
+    </section>

@@ -1,0 +1,41 @@
+<section>
+    <div class="content-wrapper">
+
+  <div class="container">
+    
+    <div class="ml-12 col-md-12">
+      <h2 class="text-center mt-5">Add Products</h2>
+      <form action="/admin/add-product" method="post" enctype="multipart/form-data">
+        <label for="">Name</label>
+        <input type="text" name="name" class="form-control" required>
+
+        <label for="">Description</label>
+        <input type="text" name="description" class="form-control" required>
+
+        <div >
+                <label for="" class="form-label">category</label>
+                <select class="form-select" aria-label="Default select example" name="category" required>
+                     
+                     {{#each category}}
+                      <option value=""></option>
+                     <option value="{{this.Category}}">{{this.Category}}</option>
+                     {{/each}}
+                </select>
+               
+            </div>
+ 
+    
+        <label for="">Price</label>
+        <input type="Number" name="price" class="form-control" required>
+
+        <label for="">Image</label>
+        <input type="file" name="image" class="form-control" required>
+
+        <button type="submit" class="btn btn-success mt-4">Submit</button>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+</section>
