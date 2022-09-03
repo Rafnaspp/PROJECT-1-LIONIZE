@@ -69,9 +69,10 @@ router.get('/signup',(req,res,next)=>{
 
 /* POST SIGNUP PAGE */
 router.post('/signup',async (req,res,next)=>{
- try {
+  console.log('post ssssssssssssssssssssssss');
    let user=await db.get().collection(collection.USER_COLLECTION).findOne({Email:req.body.Email})
    if(!user){
+    console.log('1111111111111111111111111111111111');
      req.session.body=req.body
    twillioHelper.dosms(req.session.body).then((data)=>{
      console.log(data);
@@ -88,27 +89,22 @@ router.post('/signup',async (req,res,next)=>{
    res.redirect('/signup')
    console.log('already exist');
  }
- } catch (error) {
-  next(error)
- }
-})
+ } 
+)
 
 /* GET OTP PAGE */
 router.get('/otp',(req,res,next)=>{
-  try {
+  console.log('2222222222222222222222222222222222');
     if(req.session.userLoggedIn){
       res.redirect('/login')
      }else{
       res.render('user/otp')
      }
-  } catch (error) {
-    next(error)
-  }
-})
+  } 
+)
 
 /* POST OTP PAGE */
 router.post('/otp',(req,res,next)=>{
-  try {
     twillioHelper.otpVerify(req.body,req.session.body).then((data)=>{
   
       console.log(data);
@@ -129,10 +125,8 @@ router.post('/otp',(req,res,next)=>{
           })
         }
     })
-  } catch (error) {
-    next(error)
-  }
-})
+  } 
+)
 
 /* POST LOGIN PAGE */
 router.post('/userLogin', function(req,res,next){
