@@ -7,9 +7,10 @@ const Razorpay=require('razorpay')
 const { resolve } = require('path')
 const { USER_COLLECTION } = require('../config/collections')
 const { Collection } = require('mongodb')
+require('dotenv').config()
 var instance = new Razorpay({
-    key_id: 'rzp_test_0msTdGRUUpBzyU',
-    key_secret: 'hrK9Sby0eswnOmku5NXuqcX7',
+    key_id: process.env.KEY_ID,
+    key_secret:  process.env.KEY_SECRET,
   });
 
 module.exports={

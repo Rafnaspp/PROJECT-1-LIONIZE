@@ -1,5 +1,6 @@
-const client = require('twilio')('AC540070733f87f5dbf7c18f5aa3e91df5','1b6f11620ada4a3af1f9b2ccf55c0461');
-const serviceSid='VAd733bbf502d8d04b6bc7a124e09201fe'
+require('dotenv').config()
+const client = require('twilio')(process.env.ACCOUNT_SID,process.env.AUTH_TOKEN);
+const serviceSid=process.env.TWILLIO_SERVICE_ID
 
              module.exports={
                 dosms:(noData)=>{

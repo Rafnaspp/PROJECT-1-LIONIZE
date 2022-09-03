@@ -5,6 +5,7 @@ const categoryHelpers = require('../helpers/category-helpers');
 const userHelpers = require('../helpers/user-helpers');
 const orderHelpers = require('../helpers/order-helpers');
 const adminHelper = require('../helpers/admin-helpers');
+require('dotenv').config()
 const verifyLogin=(req,res,next)=>{
   if(req.session.adminloggedIn){
     next()
@@ -371,8 +372,8 @@ router.post('/edit-category/:id',(req,res,next)=>{
 })
 
 const admindata={
-  email:"admin@gmail.com",
-  password:"12345"
+  email:process.env.ADMIN,
+  password:process.env.PASSWORD
 }
 
 /* POST ADMIN LOGIN */
