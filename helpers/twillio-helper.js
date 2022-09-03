@@ -1,4 +1,6 @@
-require('dotenv').config()
+require('dotenv').config({
+    path: path.resolve(__dirname, '../.env')
+  })
 const client = require('twilio')(process.env.ACCOUNT_SID,process.env.AUTH_TOKEN);
 const serviceSid=process.env.TWILLIO_SERVICE_ID
 

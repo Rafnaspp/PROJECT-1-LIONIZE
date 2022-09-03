@@ -7,7 +7,9 @@ const Razorpay=require('razorpay')
 const { resolve } = require('path')
 const { USER_COLLECTION } = require('../config/collections')
 const { Collection } = require('mongodb')
-require('dotenv').config()
+require('dotenv').config({
+    path: path.resolve(__dirname, '../.env')
+  })
 var instance = new Razorpay({
     key_id: process.env.KEY_ID,
     key_secret:  process.env.KEY_SECRET,
