@@ -13,7 +13,7 @@ const session = require('express-session');
 
 var app = express();
 const nocache = require('nocache');
-var fileUpload=require('express-fileUpload')
+var fileUpload=require('express-fileupload')
 
 var db=require('./config/connection')
 // view engine setup
