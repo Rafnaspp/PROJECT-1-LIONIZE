@@ -5,9 +5,10 @@ const categoryHelpers = require('../helpers/category-helpers');
 const userHelpers = require('../helpers/user-helpers');
 const orderHelpers = require('../helpers/order-helpers');
 const adminHelper = require('../helpers/admin-helpers');
+const path = require('path')
 require('dotenv').config({
-  path: path.resolve(__dirname, '../.env')
-})
+    path: path.resolve(__dirname, '../.env')
+  })
 const verifyLogin=(req,res,next)=>{
   if(req.session.adminloggedIn){
     next()

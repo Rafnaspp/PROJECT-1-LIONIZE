@@ -7,6 +7,7 @@ const Razorpay=require('razorpay')
 const { resolve } = require('path')
 const { USER_COLLECTION } = require('../config/collections')
 const { Collection } = require('mongodb')
+const path = require('path')
 require('dotenv').config({
     path: path.resolve(__dirname, '../.env')
   })
