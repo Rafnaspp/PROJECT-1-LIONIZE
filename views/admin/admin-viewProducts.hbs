@@ -25,8 +25,9 @@
                     <td>₹{{this.price}}</td>
                     <td><img src="/product-image/{{this._id}}.jpg" style="width: 50px; height: 50px;"></td>
                     <td>
-                        <a href="/admin/edit-product?id={{this._id}}" class="btn btn-primary">EDIT</a>
-                         <a href="/admin/delete-product?id={{this._id}}" class="btn btn-danger" onclick="return confirm('are you want delete {{this.name}}? ')">DELETE</a> 
+                        
+                        <a href="/admin/edit-product?id={{this._id}}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                         <a href="/admin/delete-product?id={{this._id}}" class="btn btn-danger" onclick="return confirm('are you want delete {{this.name}}? ')"><i class="fa-sharp fa-solid fa-trash"></i></a> 
                     </td>
                 </tr>
                 {{/each}}
